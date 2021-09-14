@@ -1,14 +1,53 @@
 # samba docker
 
-## 手动制作samba镜像
+## 基础使用
 
-下载基础镜像
+下载基础image
 
 	docker pull centos:centos7
 
-后台运行容器
+查看系统中的image
+
+	docker images
+
+交互式运行image,运行起来后就叫container
+
+	docker run -it --name myctos centos:centos7
+
+查看当前container情况
+
+	docker ps -l
+
+删除container
+
+	docker rm myctos
+
+后台运行container
+
+	docker run -d -it --name myctos centos:centos7
+
+查看某个container后进入执行
+
+	docker ps -l
+	docker exec -it myctos bash
+
+后台运行容器(并挂在本地目录share2docker到container中的mnt下)
 
 	docker run -d --network host -it -v /home/anonymous/share2docker/:/mnt --name mysamba centos:centos7
+
+开启全部container
+
+	docker start $(docker ps -q)
+
+停止全部container
+
+	docker stop $(docker ps -q)
+
+删除全部container
+
+	docker rm $(docker ps -aq)
+
+## 制作samba服务docker镜像
 
 执行相应操作
 
