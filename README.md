@@ -88,3 +88,15 @@
 
 	docker exec sambademo smbd
 	docker exec sambademo nmbd
+
+## web server
+
+下载nginx的docker镜像
+
+	docker pull nginx
+
+创建对应的容器,映射本地端口999到container里的80端口(path-to-html下时html的网页文件)
+
+	docker run -d --name web -p 999:80 -v /path-to-html-dir:/usr/share/nginx/html nginx
+
+在浏览器中访问ip:999即可
