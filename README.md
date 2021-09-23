@@ -30,6 +30,7 @@
 
 	docker ps -l
 	docker exec -it myctos bash
+	docker exec -it myctos sh # 有些容器中没有bash
 
 后台运行容器(并挂在本地目录share2docker到container中的mnt下)
 
@@ -100,3 +101,8 @@
 	docker run -d --name web -p 999:80 -v /path-to-html-dir:/usr/share/nginx/html nginx
 
 在浏览器中访问ip:999即可
+
+## prometheus and grafana
+
+	docker run -d --name myprometheus -p 9090:9090 -v /path-cotain-prometheus.yml:/etc/prometheus prom/prometheus:v2.30.0
+	docker run -d --name mygrafana -p 3000:3000 --name gfn grafana/grafana
