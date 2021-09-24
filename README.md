@@ -106,3 +106,23 @@
 
 	docker run -d --name myprometheus -p 9090:9090 -v /path-cotain-prometheus.yml:/etc/prometheus prom/prometheus:v2.30.0
 	docker run -d --name mygrafana -p 3000:3000 --name gfn grafana/grafana
+
+## [Running graphic application in a container](https://www.spice-space.org/demos.html)
+
+使用[Dockerfile](./Dockerfile)制作相应的镜像
+
+	docker build -t xspice:v0.1 .
+
+其中Dockerfile里
+
+	RUN 后面的操作会在制作镜像时自动执行
+	CMD 后面的操作会在启动镜像时执行
+
+启动容器进入后安装一个图形界面的软件(tuxmath)用于验证测试
+
+	docker run -it -p 5901:5900 --name xspicetst xspice:v0.1
+	dnf install -y tuxmath && tuxmath
+
+使用spice客户端进行连接
+
+	remote-viewer spice://localhost:5901
