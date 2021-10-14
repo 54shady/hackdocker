@@ -1,4 +1,4 @@
-# samba docker
+# Docker Usage
 
 ## 基础使用
 
@@ -89,6 +89,10 @@
 
 	docker exec sambademo smbd
 	docker exec sambademo nmbd
+
+### 使用samba docker镜像
+
+[参考文件samba.sh](./samba.sh)
 
 ## web server
 
