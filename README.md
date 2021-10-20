@@ -1,5 +1,35 @@
 # Docker Usage
 
+## docker本质
+
+docker利用主机资源跑rootfs
+
+下载一个docker image来验证(后续会用gentoo制作任何镜像)
+
+	docker pull alpine
+
+将这个docker镜像保存在本地并导出其rootfs
+
+	docker save -o alp.tar alpine:latest
+	tar xvf alp.tar //可以发现有个目录,这个目录中有个文件layer.tar
+	tar xvf layer.tar -C rootfs //解压这个layer.tar到rootfs目录
+
+现在来逆向docker镜像的过程(将这个rootfs打包成一个docker镜像)
+
+写一个Dockerfile内容如下
+
+	FROM scratch
+	COPY rootfs /
+	ENTRYPOINT ["/bin/sh"]
+
+执行命令生成docker镜像
+
+	docker build . -t myimage
+
+测试运行生成的docker镜像
+
+	docker run -it --rm myimage
+
 ## 基础使用
 
 下载基础image
