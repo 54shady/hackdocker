@@ -130,3 +130,23 @@
 使用spice客户端进行连接
 
 	remote-viewer spice://localhost:5901
+
+## [running arm64 docker image on x86 host](https://www.stereolabs.com/docs/docker/building-arm-container-on-x86/)
+
+[docker image: qemu-user-static](https://hub.docker.com/r/multiarch/qemu-user-static)
+
+在x86机器上运行arm64的docker镜像,先下载对应的镜像
+
+	docker pull arm64v8/centos:7
+
+下载qemu static的镜像
+
+	docker pull multiarch/qemu-user-static
+
+注册各个平台的可执行程序接口
+
+	docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+
+在x86机器上运行arm的docker镜像
+
+	docker run --platform=linux/arm64/v8 -it arm64v8/centos:7
