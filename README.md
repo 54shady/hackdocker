@@ -180,3 +180,23 @@ docker利用主机资源跑rootfs
 在x86机器上运行arm的docker镜像
 
 	docker run --platform=linux/arm64/v8 -it arm64v8/centos:7
+
+## 使用gentoo来制作busybox的docker镜像
+
+编译相关的rootfs
+
+	ROOT=/tmp/rootfs emerge busybox
+
+Dockerfile内容如下
+
+	FROM scratch
+	COPY rootfs /
+	ENTRYPOINT ["/bin/busybox", "sh"]
+
+打包生成docker镜像
+
+	docker build . -t mybusybox
+
+测试生成的镜像
+
+	docker run -it --rm mybusybox
