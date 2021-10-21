@@ -1,4 +1,5 @@
-# Docker Usage
+# ~~Deprecated, head for mygentoo project for more details~~
+# 后续更新不再此项目中,更改到[mygentoo](https://github.com/54shady/mygentoo/blob/master/docker/README.md)
 
 ## docker本质
 
